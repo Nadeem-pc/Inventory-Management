@@ -1,5 +1,5 @@
 ## 📦 Inventory Management (TypeScript)  
-A simple inventory management system built with **TypeScript**, allowing users to add, edit, delete, and list products efficiently.
+The Inventory Management System is a lightweight and efficient application built using **TypeScript**, designed to help users seamlessly manage their inventory. This system enables users to add new products, update existing ones, delete unwanted items, and view a complete list of available products.
 
 
 ---
