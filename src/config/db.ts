@@ -5,7 +5,7 @@ import path from "path";
 // Explicitly load .env file
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
-console.log("Loaded MONGO_URI:", process.env.MONGO_URI); // Debugging Line
+console.log("Loaded MONGO_URI:", process.env.MONGO_URI); 
 
 const connectDB = async () => {
     try {

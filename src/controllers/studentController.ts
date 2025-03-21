@@ -28,9 +28,9 @@ class stdController{
                 category,
             })
             await newStudent.save();
-            // res.status(200).json({message:"success"})
             res.redirect('/')
-        } catch (error) {
+        } 
+        catch (error) {
             console.error(error)
         }
     }
@@ -57,8 +57,6 @@ class stdController{
                 },
                 { new: true, runValidators: true }
             );
-            
-            // res.status(200).json({message:"success"})
             res.redirect('/')
         } catch (error) {
             console.error(error)
@@ -70,10 +68,9 @@ class stdController{
             console.log(stdId)
             const softDeleteStudent = await StudentModel.updateOne({_id:stdId},{$set:{isBlocked:true}})
             if (softDeleteStudent.modifiedCount > 0) {
-                // return res.status(200).json({ message: "Product successfully blocked" });
                 return res.redirect('/')
-
-            } else {
+            } 
+            else {
                 return res.status(404).json({ message: "Student not found or already blocked" });
             }
         } catch (error) {
