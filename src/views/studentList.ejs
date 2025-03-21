@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System - Products List</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06094c;
+            --secondary: #7116f9;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        body {
+            background: #fef2f2;
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            background: var(--gradient);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(239, 68, 68, 0.1);
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.1);
+        }
+
+        .btn-gradient {
+            background: var(--gradient);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);
+        }
+
+        .nav-item {
+            @apply px-4 py-2 rounded-lg transition-all duration-300;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .table-row {
+            transition: all 0.3s ease;
+        }
+
+        .table-row:hover {
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .action-button {
+            @apply px-3 py-1 rounded-lg text-sm font-medium transition-all duration-300;
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #fee2e2;
+            transition: all 0.3s ease;
+            @apply block rounded-xl px-4 py-2;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+            outline: none;
+        }
+
+        .status-badge {
+            @apply px-2 py-1 rounded-full text-xs font-medium;
+        }
+
+        .status-active {
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+        }
+
+        .status-inactive {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-2xl font-bold">
+                        <i class="fas fa-graduation- mr-2"></i>
+                        Inventory Management
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <a href="#" class="nav-item">Products</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Products</h1>
+                <p class="text-gray-600 mt-1">Manage and view all Products</p>
+            </div>
+            <button class="btn-gradient px-4 py-2 rounded-xl font-medium flex items-center" onclick="window.location.href='/addStudent'">
+                <i class="fas fa-plus mr-2"></i>
+                Add New Product
+            </button>
+        </div>
+
+
+        <div class="glass-card rounded-xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <%if(students.length==0){%>
+                    <div class="p-5 text-center"><h5>No Products found</h5></div>
+                    <%}else{%>
+                <table class="w-full">
+                    <thead class="bg-red-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Price</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Category</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Stocks</th>
+                            <th class="px-6 py-3 text-right text-sm font-medium text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody class="divide-y divide-red-100">
+                        <%students.forEach(student=>{%>
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <!-- <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-medium"><%=student.name.slice(0,2).toUpperCase()%></div> -->
+                                    <div class="ml-3">
+                                        <div class="font-medium text-gray-900"><%=student.name%></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-gray-700">₹<%=student.price%></td>
+                            <td class="px-6 py-4 text-gray-700"><%=student.category%></td>
+                            <td class="px-6 py-4 text-gray-700"><%=student.stock%></td>
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <button class="action-button bg-blue-50 text-blue-600 hover:bg-blue-100" onclick="window.location.href='/editStudent/<%=student._id%>'">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-button bg-red-50 text-red-600 hover:bg-red-100" onclick="window.location.href='/deleteStudent/<%=student._id%>'">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <%})%>
+                    </tbody>
+                </table>
+                <%}%>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
